@@ -46,6 +46,7 @@ public class Graph {
         StringBuilder sb = new StringBuilder();
         DFSRecursive(s, visited, sb);
 
+        // check for disconnected vertices
         for (int i=0; i<vertNum; i++) {
             if (!visited[i]) {
                 DFSRecursive(i, visited, sb);

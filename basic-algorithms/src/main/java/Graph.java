@@ -28,7 +28,7 @@ public class Graph {
         StringBuilder sb = new StringBuilder();
         while (!queue.isEmpty()) {
             int actualVertex =queue.poll();
-            sb.append(actualVertex + " ");
+            sb.append(actualVertex).append(" ");
 
             for (int vi : adj[actualVertex]) {
                 if (!visited[vi]) {
@@ -38,5 +38,32 @@ public class Graph {
             }
         }
         return sb.toString();
+    }
+
+    public String DFS(int s) {
+        boolean[] visited = new boolean[vertNum];
+
+        StringBuilder sb = new StringBuilder();
+        DFSRecursive(s, visited, sb);
+
+        for (int i=0; i<vertNum; i++) {
+            if (!visited[i]) {
+                DFSRecursive(i, visited, sb);
+            }
+        }
+        return sb.toString();
+    }
+
+    private StringBuilder DFSRecursive(int s, boolean[] visited, StringBuilder sb) {
+        visited[s] = true;
+        sb.append(s).append(" ");
+
+        for (int vi : adj[s]) {
+            if (!visited[vi]) {
+                DFSRecursive(vi, visited, sb);
+            }
+        }
+
+        return sb;
     }
 }

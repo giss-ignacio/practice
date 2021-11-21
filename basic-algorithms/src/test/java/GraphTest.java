@@ -1,11 +1,13 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class GraphTest {
+    private Graph g;
 
-    @Test
-    public void BFS() {
+    @Before
+    public void setup() {
         /*
          *  ┌─0──────►1
          *  │ ▲      │
@@ -15,7 +17,7 @@ public class GraphTest {
          *    └─────────┘
          */
 
-        Graph g = new Graph(4);
+        g = new Graph(4);
 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
@@ -23,8 +25,17 @@ public class GraphTest {
         g.addEdge(2, 0);
         g.addEdge(2, 3);
         g.addEdge(3, 3);
+    }
 
+    @Test
+    public void BFS() {
         String expected = "2 0 3 1 ";
         assertEquals(expected, g.BFS(2));
+    }
+
+    @Test
+    public void DFS() {
+        String expected = "2 0 1 3 ";
+        assertEquals(expected, g.DFS(2));
     }
 }

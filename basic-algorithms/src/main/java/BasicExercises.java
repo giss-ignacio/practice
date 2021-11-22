@@ -29,4 +29,16 @@ public class BasicExercises {
 
         return globalMax;
     }
+
+    // Sudoku solver
+    // flood filler
+    // Given an unsorted array of numbers, find 2 elements to sums to K (hash map)
+    // Given a string containing parenthesis characters, balance that this is a balance expression of parenthesis.
+    // effective fibonacci with dynamic programming
+
+    // Coding In-memory caching component for an existing system. Your task is to implement a least recently used (LRU) cache
+    // def: It's a data structure of fixed initial capacity N, and if at any moment it is asked to add the (N+1) item it will remove the
+    // least recently used item to accommodate the new one.
+    // get(key)
+    // insert(key, value)
 }

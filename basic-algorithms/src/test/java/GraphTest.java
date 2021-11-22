@@ -38,4 +38,18 @@ public class GraphTest {
         String expected = "2 0 1 3 ";
         assertEquals(expected, g.DFS(2));
     }
+
+    @Test
+    public void DFSOnDisconnectedGraph() {
+        Graph gd = new Graph(4);
+
+        gd.addEdge(0, 1);
+        gd.addEdge(0, 2);
+        gd.addEdge(1, 2);
+        gd.addEdge(2, 0);
+        gd.addEdge(3, 3);
+        String expected = "2 0 1 3 ";
+        assertEquals(expected, gd.DFS(2));
+    }
+
 }

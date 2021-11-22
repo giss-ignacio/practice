@@ -15,4 +15,18 @@ public class BasicExercises {
 
         return x1 ^ x2;
     }
+
+    public static int findMaximumSubArray(int[] v) {
+        int globalMax = Integer.MIN_VALUE;
+        int localMax = 0;
+
+        for (int e : v) {
+            localMax = Math.max(e, e+localMax);
+            if (localMax > globalMax) {
+                globalMax = localMax;
+            }
+        }
+
+        return globalMax;
+    }
 }

@@ -10,4 +10,10 @@ public class BasicExercisesTest {
         int found = BasicExercises.getMissingNumber(v);
         assertEquals(4, found);
     }
+
+    @Test
+    public void findMaxSubArrayTest() {
+        int[] vector = {4, 2, -3, 6, 1};
+        assertEquals(10, BasicExercises.findMaximumSubArray(vector));
+    }
 }

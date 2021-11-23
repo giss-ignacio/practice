@@ -60,6 +60,21 @@ public class BasicExercisesTest {
         assertTrue(BasicExercises.isBalancedParenthesis("(()())"));
         assertFalse(BasicExercises.isBalancedParenthesis("(()))"));
         assertTrue(BasicExercises.isBalancedParenthesis("aa(ss(dd)(asd))"));
+    }
 
+    @Test
+    public void isBalancedParenthesisExtraTest() {
+        assertTrue(BasicExercises.isBalancedParenthesis(""));
+        assertFalse(BasicExercises.isBalancedParenthesis("("));
+        assertFalse(BasicExercises.isBalancedParenthesis("["));
+        assertFalse(BasicExercises.isBalancedParenthesis("{"));
+        assertFalse(BasicExercises.isBalancedParenthesis(")"));
+        assertTrue(BasicExercises.isBalancedParenthesis("()"));
+        assertTrue(BasicExercises.isBalancedParenthesis("[]"));
+        assertTrue(BasicExercises.isBalancedParenthesis("{}"));
+        assertTrue(BasicExercises.isBalancedParenthesis("([{}])"));
+        assertTrue(BasicExercises.isBalancedParenthesis("(([])({}))"));
+        assertFalse(BasicExercises.isBalancedParenthesis("(()[)])"));
+        assertTrue(BasicExercises.isBalancedParenthesis("aa(ss{dd}[asd])"));
     }
 }

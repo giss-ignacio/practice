@@ -61,29 +61,35 @@ public class BasicExercises {
         floodFillRec(m, x, y+1, c, cOri);
     }
 
-    /*
-     * "asd" - t
-     * "()" - t
-     * "(" - f
-     * "(()())" - t
-     * "(()))" - f
-     */
     public static boolean isBalancedParenthesis(String s) {
         char[] chars = s.toCharArray();
         Stack<Character> parenthesis = new Stack<>();
 
         for (char c : chars) {
-            if (c!='(' && c!=')') {
-                continue;
-            }
-            if (c=='(') {
-                parenthesis.push(c);
-            } else {
-                if (parenthesis.empty() || parenthesis.pop() != '(') {
-                    return false;
-                }
+            switch (c) {
+                case '(':
+                case '[':
+                case '{':
+                    parenthesis.push(c);
+                    break;
+                case ')':
+                    if (parenthesis.empty() || parenthesis.pop() != '(') {
+                        return false;
+                    }
+                    break;
+                case ']':
+                    if (parenthesis.empty() || parenthesis.pop() != '[') {
+                        return false;
+                    }
+                    break;
+                case '}':
+                    if (parenthesis.empty() || parenthesis.pop() != '{') {
+                        return false;
+                    }
+                    break;
             }
         }
+
 
         return parenthesis.empty();
     }

@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class BasicExercises {
 
     public static int getMissingNumber(int[] v) {
@@ -30,8 +32,64 @@ public class BasicExercises {
         return globalMax;
     }
 
+    public static void floodFill(int[][] m, int x, int y, int c) {
+        if (m.length == 0 || x<0 || y<0 || x>= m.length || y>= m[0].length) {
+            return; // or throw an illegal argument exception
+        }
+        int cOri = m[x][y];
+        if (c==cOri) {
+            return;
+        }
+
+        floodFillRec(m, x, y, c, cOri);
+    }
+
+    private static void floodFillRec(int[][] m, int x, int y, int c, int cOri) {
+        // reached an edge
+        if (x<0 || y<0 || x>= m.length || y>= m[0].length) {
+            return;
+        }
+        // reached tile of different color than the original (an edge of color)
+        if (m[x][y] != cOri) {
+           return;
+        }
+
+        m[x][y] = c;
+        floodFillRec(m, x-1, y, c, cOri);
+        floodFillRec(m, x, y-1, c, cOri);
+        floodFillRec(m, x+1, y, c, cOri);
+        floodFillRec(m, x, y+1, c, cOri);
+    }
+
+    /*
+     * "asd" - t
+     * "()" - t
+     * "(" - f
+     * "(()())" - t
+     * "(()))" - f
+     */
+    public static boolean isBalancedParenthesis(String s) {
+        char[] chars = s.toCharArray();
+        Stack<Character> parenthesis = new Stack<>();
+
+        for (char c : chars) {
+            if (c!='(' && c!=')') {
+                continue;
+            }
+            if (c=='(') {
+                parenthesis.push(c);
+            } else {
+                if (parenthesis.empty() || parenthesis.pop() != '(') {
+                    return false;
+                }
+            }
+        }
+
+        return parenthesis.empty();
+    }
+
     // Sudoku solver
-    // flood filler
+    // flood fill
     // Given an unsorted array of numbers, find 2 elements to sums to K (hash map)
     // Given a string containing parenthesis characters, balance that this is a balance expression of parenthesis.
     // effective fibonacci with dynamic programming

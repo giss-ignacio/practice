@@ -69,6 +69,14 @@ public class BasicSorting {
         }
     }
 
+    /*
+     * {4, 8, 5} - 4, 5, 6, 7, 8 - 5 possible values
+     * freq = [1, 2, 2, 2, 3]
+     * tmp = [4, 5, 8]
+     *
+     *
+
+     */
     public static void countingSort(int[] v) {
         int max = Arrays.stream(v).max().getAsInt();
         int min = Arrays.stream(v).min().getAsInt();
@@ -83,8 +91,8 @@ public class BasicSorting {
         }
 
         for (int i=v.length-1; i>=0; i--) {
-            result[freq[v[i]-min] -1] = v[i];
             freq[v[i] - min]--;
+            result[freq[v[i]-min]] = v[i];
         }
         System.arraycopy(result, 0, v, 0, v.length);
     }

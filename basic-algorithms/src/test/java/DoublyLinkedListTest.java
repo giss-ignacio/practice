@@ -8,55 +8,55 @@ import java.util.NoSuchElementException;
 import static org.junit.Assert.assertEquals;
 
 public class DoublyLinkedListTest {
-    private DoublyLinkedList dllist;
+    private DoublyLinkedList<Integer, Integer> dllist;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setup() {
-        dllist = new DoublyLinkedList();
+        dllist = new DoublyLinkedList<>();
 
-        dllist.insertAtHead(2);
-        dllist.insertAtHead(3);
-        dllist.insertAtHead(1);
+        dllist.insertAtHead(2, 2);
+        dllist.insertAtHead(3, 3);
+        dllist.insertAtHead(1, 1);
     }
 
     @Test
     public void insertAtHeadOneElementTest() {
-        DoublyLinkedList dl = new DoublyLinkedList();
+        DoublyLinkedList<Integer, Integer> dl = new DoublyLinkedList<>();
 
-        dl.insertAtHead(2);
+        dl.insertAtHead(2, 2);
         assertEquals("2 ", dl.toString());
-        assertEquals(2, dl.getHead());
+        assertEquals(2, (int) dl.getHead());
     }
 
     @Test
     public void insertAtHeadTwoElementsTest() {
-        DoublyLinkedList dl = new DoublyLinkedList();
+        DoublyLinkedList<Integer, Integer> dl = new DoublyLinkedList<>();
 
-        dl.insertAtHead(2);
-        dl.insertAtHead(3);
+        dl.insertAtHead(2, 2);
+        dl.insertAtHead(3, 3);
         assertEquals("3 2 ", dl.toString());
-        assertEquals(3, dl.getHead());
+        assertEquals(3, (int) dl.getHead());
     }
 
     @Test
     public void insertAtHeadThreeElementsTest() {
-        DoublyLinkedList dl = new DoublyLinkedList();
+        DoublyLinkedList<Integer, Integer> dl = new DoublyLinkedList<>();
 
-        dl.insertAtHead(2);
-        dl.insertAtHead(3);
-        dl.insertAtHead(1);
+        dl.insertAtHead(2, 2);
+        dl.insertAtHead(3, 3);
+        dl.insertAtHead(1, 1);
         assertEquals("1 3 2 ", dl.toString());
-        assertEquals(1, dl.getHead());
+        assertEquals(1, (int) dl.getHead());
     }
 
     @Test
     public void moveToHeadTest() {
         dllist.moveToHead(3);
         assertEquals("3 1 2 ", dllist.toString());
-        assertEquals(3, dllist.getHead());
+        assertEquals(3, (int) dllist.getHead());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class DoublyLinkedListTest {
 
     @Test
     public void moveToHeadEmptyExpectException() {
-        DoublyLinkedList emptyList = new DoublyLinkedList();
+        DoublyLinkedList<Integer, Integer> emptyList = new DoublyLinkedList<>();
         expectedException.expect(NoSuchElementException.class);
         expectedException.expectMessage("Cannot move element to head. The value is not in the list.");
         emptyList.moveToHead(2);

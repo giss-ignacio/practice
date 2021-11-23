@@ -1,12 +1,12 @@
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList {
-    private Node head;
-    private Node tail;
+public class DoublyLinkedList<K, V> {
+    private Node<K, V> head;
+    private Node<K, V> tail;
 
 
-    public void insertAtHead(int value) {
-        Node newHead = new Node(value);
+    public void insertAtHead(K key, V value) {
+        Node<K, V> newHead = new Node<>(key, value);
         if (head == null) {
             head = newHead;
             tail = newHead;
@@ -17,8 +17,8 @@ public class DoublyLinkedList {
         head = newHead;
     }
 
-    public void insertAtTail(int value) {
-        Node newTail = new Node(value);
+    public void insertAtTail(K key, V value) {
+        Node<K, V> newTail = new Node<>(key, value);
         if (tail == null) {
             tail = newTail;
             head = newTail;
@@ -29,8 +29,8 @@ public class DoublyLinkedList {
         tail = newTail;
     }
 
-    public void moveToHead(int value) {
-        Node node = findNode(value);
+    public void moveToHead(K key) {
+        Node<K, V> node = findNode(key);
         if (node == null) {
             throw new NoSuchElementException("Cannot move element to head. The value is not in the list.");
         }
@@ -43,27 +43,27 @@ public class DoublyLinkedList {
         head = node;
     }
 
-    private Node findNode(int value) {
+    private Node<K, V> findNode(K key) {
         if (head == null) {
             return null;
         }
-        Node result = head;
-        while (result != null && result.value != value) {
+        Node<K, V> result = head;
+        while (result != null && result.value != key) {
             result = result.next;
         }
         return result;
     }
 
-    public int getHead() {
+    public V getHead() {
         if (head == null) {
             throw new NoSuchElementException("The list has no head because it's empty");
         }
-        return head.value;
+        return head.getValue();
     }
 
     @Override
     public String toString() {
-        Node actualNode = head;
+        Node<K, V> actualNode = head;
         StringBuilder sb = new StringBuilder();
         while (actualNode != null) {
             sb.append(actualNode.value).append(" ");
@@ -76,13 +76,19 @@ public class DoublyLinkedList {
     /**
      * List node class.
      */
-    private static class Node {
-        int value;
-        Node prev;
-        Node next;
+    private static class Node<K, V> {
+        K key;
+        V value;
+        Node<K, V> prev;
+        Node<K, V> next;
 
-        public Node(int value) {
+        public Node(K key, V value) {
+            this.key = key;
             this.value = value;
+        }
+
+        public V getValue() {
+            return value;
         }
     }
 

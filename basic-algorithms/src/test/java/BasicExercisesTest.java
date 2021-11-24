@@ -77,4 +77,66 @@ public class BasicExercisesTest {
         assertFalse(BasicExercises.isBalancedParenthesis("(()[)])"));
         assertTrue(BasicExercises.isBalancedParenthesis("aa(ss{dd}[asd])"));
     }
+
+    @Test
+    public void fibonacciRecTest() {
+        assertEquals(5, BasicExercises.fibonacciRec(4));
+        assertEquals(8, BasicExercises.fibonacciRec(5));
+        assertEquals(13, BasicExercises.fibonacciRec(6));
+    }
+
+    @Test
+    public void fibonacciIterTest() {
+        assertEquals(5, BasicExercises.fibonacciIter(4));
+        assertEquals(8, BasicExercises.fibonacciIter(5));
+        assertEquals(13, BasicExercises.fibonacciIter(6));
+    }
+
+    @Test
+    public void twoSumToK_BFTest() {
+        int[] v = {1, 2, 3, 5, 6};
+        assertTrue(BasicExercises.twoSumToK_BF(v, 7));
+        assertFalse(BasicExercises.twoSumToK_BF(v, 10));
+        assertTrue(BasicExercises.twoSumToK_BF(v, 3));
+    }
+
+    @Test
+    public void twoSumToK_Sorting2ElementsTest() {
+        int[] v = {1, 2};
+        assertTrue(BasicExercises.twoSumToK_Sort(v, 3));
+        assertFalse(BasicExercises.twoSumToK_Sort(v, 4));
+    }
+
+    @Test
+    public void twoSumToK_Sorting3ElementsTest() {
+        int[] v = {3, 1, 2};
+        assertTrue(BasicExercises.twoSumToK_Sort(v, 3));
+        assertTrue(BasicExercises.twoSumToK_Sort(v, 5));
+        assertFalse(BasicExercises.twoSumToK_Sort(v, 6));
+    }
+
+    @Test
+    public void twoSumToK_SortingTest() {
+        int[] v = {1, 2, 3, 5, 6};
+        //assertTrue(BasicExercises.twoSumToK_Sort(v, 7));
+        assertFalse(BasicExercises.twoSumToK_Sort(v, 10));
+        assertTrue(BasicExercises.twoSumToK_Sort(v, 3));
+    }
+
+    @Test
+    public void sudokuSolverTest() {
+        int[][] board = new int[][] {
+                { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
+                { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
+                { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
+                { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
+                { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
+                { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
+                { 0, 0, 5, 2, 0, 6, 3, 0, 0 }
+        };
+
+        BasicExercises.sudokuSolver(board);
+    }
 }

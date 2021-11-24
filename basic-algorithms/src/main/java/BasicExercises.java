@@ -1,6 +1,10 @@
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class BasicExercises {
+
+    private static Scanner scanner = new Scanner(System.in);
 
     public static int getMissingNumber(int[] v) {
         if (v.length==0) {
@@ -93,6 +97,162 @@ public class BasicExercises {
 
         return parenthesis.empty();
     }
+
+    public static void sudokuSolver(int[][] board) {
+        int remaining = countUnsolved(board);
+        sudokuSolver(board, remaining);
+    }
+
+    private static int countUnsolved(int[][] board) {
+        int count = 0;
+        for (int i=0; i< 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private static boolean sudokuSolver(int[][] board, int remaining) {
+        if (remaining == 0) {
+            return true;
+        }
+        for (int i=0; i< 9; i++) {
+            for (int j=0; j<9; j++) {
+                if (board[i][j] == 0) {
+                    for (int n=1; n<10 ; n++) {
+                        if (possibleSudokuPosition(board, i, j, n)) {
+                            board[i][j] = n;
+                            remaining--;
+                            if (sudokuSolver(board, remaining)) {
+                                return true;
+                            };
+                            remaining++;
+                            board[i][j] = 0; // ?
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean possibleSudokuPosition(int[][] board, int x, int y, int n) {
+        return possibleSudokuColumnPosition(board, y, n) && possibleSudokuRowPosition(board, y, n) && possibleSudokuSquarePosition(board, x, y, n);
+    }
+
+    private static boolean possibleSudokuColumnPosition(int[][] board, int columm, int n) {
+        for (int i=0; i<9; i++) {
+            if (board[i][columm] == n) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean possibleSudokuRowPosition(int[][] board, int row, int n) {
+        for (int i=0; i<9; i++) {
+            if (board[row][i] == n) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+     *  1 1 1 2 2 2 3 3 3
+     *  1 1 1 2 2 2 3 3 3
+     *  1 1 1 2 2 2 3 3 3
+     *  4 4 4 5 5 5 6 6 6  - 4,4  - 3 to 5 col rows  x1=4-4%3 to <x1+3
+     *  4 4 4 5 5 5 6 6 6
+     *  4 4 4 5 5 5 6 6 6  - 2, 5 - x1=2-(2%3); y1= 5-(5%3)
+     *  7 7 7 8 8 8 9 9 9
+     *  7 7 7 8 8 8 9 9 9 - 8, 7 - x1 = 8-(8%3) = 6; y1 = 7-(7%3)
+     *  7 7 7 8 8 8 9 9 9
+     *
+     */
+    private static boolean possibleSudokuSquarePosition(int[][] board, int x, int y, int n) {
+        int x1 = x-(x%3);
+        int y1 = y-(y%3);
+        for (int i=x1; i<x1+3; i++) {
+          for (int j=y1; j<y1+3; j++) {
+              if (board[i][j] == n) {
+                  return false;
+              }
+          }
+        }
+        return true;
+    }
+
+
+    public static int fibonacciRec(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        return fibonacciRec(n-1) + fibonacciRec(n-2);
+    }
+
+    public static int fibonacciIter(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+
+        int result = 0;
+        int previous_1=1, previous_2=1;
+
+        for (int i=2; i<=n ; i++) {
+            result = previous_1 + previous_2;
+            previous_1 = previous_2;
+            previous_2 = result;
+        }
+
+        return result;
+    }
+
+    public static boolean twoSumToK_BF(int[] v, int k) {
+        for (int i=0; i<v.length; i++) {
+            for (int j=0; j < v.length; j++) {
+                if (i==j) {
+                    continue;
+                }
+                if (v[i]+v[j] == k) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
+     * k = 3
+     * {} f
+     * {1} f
+     * {3, 1, 2} t
+     * {3, 4, 5} f
+     */
+    public static boolean twoSumToK_Sort(int[] v, int k) {
+        if (v.length == 0 || v.length == 1) {
+            return false; // throw new IllegalArgumentException("v needs to have at least 2 numbers");
+        }
+        if (v.length == 2) {
+            return v[0] + v[1] == k;
+        }
+
+        Arrays.sort(v);
+
+        for (int e : v) {
+            //todo avoid same pos
+            if (BasicSearch.binarySearch(v, k-e) != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     // Sudoku solver
     // flood fill

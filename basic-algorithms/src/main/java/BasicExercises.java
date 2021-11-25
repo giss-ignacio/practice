@@ -98,11 +98,6 @@ public class BasicExercises {
         return parenthesis.empty();
     }
 
-    public static void sudokuSolver(int[][] board) {
-        int remaining = countUnsolved(board);
-        sudokuSolver(board, remaining);
-    }
-
     private static int countUnsolved(int[][] board) {
         int count = 0;
         for (int i=0; i< 9; i++) {
@@ -115,22 +110,17 @@ public class BasicExercises {
         return count;
     }
 
-    private static boolean sudokuSolver(int[][] board, int remaining) {
-        if (remaining == 0) {
-            return true;
-        }
+    public static boolean sudokuSolver(int[][] board) {
         for (int i=0; i< 9; i++) {
             for (int j=0; j<9; j++) {
                 if (board[i][j] == 0) {
                     for (int n=1; n<10 ; n++) {
                         if (possibleSudokuPosition(board, i, j, n)) {
                             board[i][j] = n;
-                            remaining--;
-                            if (sudokuSolver(board, remaining)) {
+                            if (sudokuSolver(board)) {
                                 return true;
-                            };
-                            remaining++;
-                            board[i][j] = 0; // ?
+                            }
+                            board[i][j] = 0;
                         }
                     }
                     return false;
@@ -141,7 +131,7 @@ public class BasicExercises {
     }
 
     private static boolean possibleSudokuPosition(int[][] board, int x, int y, int n) {
-        return possibleSudokuColumnPosition(board, y, n) && possibleSudokuRowPosition(board, y, n) && possibleSudokuSquarePosition(board, x, y, n);
+        return possibleSudokuColumnPosition(board, y, n) && possibleSudokuRowPosition(board, x, n) && possibleSudokuSquarePosition(board, x, y, n);
     }
 
     private static boolean possibleSudokuColumnPosition(int[][] board, int columm, int n) {
@@ -259,6 +249,7 @@ public class BasicExercises {
     // Given an unsorted array of numbers, find 2 elements to sums to K (hash map)
     // Given a string containing parenthesis characters, balance that this is a balance expression of parenthesis.
     // effective fibonacci with dynamic programming
+    // hanoi towers?
 
     // Coding In-memory caching component for an existing system. Your task is to implement a least recently used (LRU) cache
     // def: It's a data structure of fixed initial capacity N, and if at any moment it is asked to add the (N+1) item it will remove the

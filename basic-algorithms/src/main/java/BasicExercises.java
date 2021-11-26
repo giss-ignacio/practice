@@ -243,6 +243,93 @@ public class BasicExercises {
     }
 
 
+    /*
+     *   0  0  1  0
+     *   1  0  0  0
+     *   0  0  0  1
+     *   0  1  0  0
+     */
+    public static boolean nQueenProblem(int[][] board, int col, int countQueens) {
+        if (col >= 4) {
+            return countQueens == 0;
+
+        }
+        for (int i=0; i<4; i++) {
+            if (board[i][col] == 0) {
+
+                if (possibleNQueenPosition(board, i, col)) {
+                    board[i][col] = 1;
+                    countQueens--;
+                    if (nQueenProblem(board, col+1, countQueens)) {
+                        return true;
+                    }
+                    board[i][col] = 0;
+                    countQueens++;
+                }
+            }
+        }
+        if (col == 3) {
+            return false;
+        }
+        return nQueenProblem(board, col+1, countQueens);
+    }
+
+    private static boolean possibleNQueenPosition(int[][] board, int x, int y) {
+        return possibleNQueenColumnPosition(board, y) && possibleNQueenRowPosition(board, x)
+                && possibleNQueenRDiagonalPosition(board, x, y) && possibleNQueenLDiagonalPosition(board, x, y);
+    }
+
+    private static boolean possibleNQueenColumnPosition(int[][] board, int y) {
+        for (int i=0; i<4; i++) {
+            if (board[i][y] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean possibleNQueenRowPosition(int[][] board, int x) {
+        for (int i=0; i<4; i++) {
+            if (board[x][i] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+     *  0 1 0 0  -> 1, 0 -
+     *  0 0 0 0  -> 2, 1 -
+     *  0 1 0 0  -> 1, 2 - 0, 1
+     *  0 0 1 0 ->2, 3 - 0, 1
+     */
+    private static boolean possibleNQueenLDiagonalPosition(int[][] board, int x, int y) {
+        int x1 = Math.max(x - y, 0);
+        int y1 = Math.max(y - x, 0);
+        for (int i=0; i+x1+y1<4; i++) {
+            if (board[i+x1][i+y1] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+     *  0 1 0 0  -> 1, 0 -
+     *  0 0 0 0  -> 0, 1 -
+     *  0 1 1 0  -> 2, 2 - 1, 3
+     *  0 0 1 0 -> 2, 3 - 0, 1
+     */
+    private static boolean possibleNQueenRDiagonalPosition(int[][] board, int x, int y) {
+        int x1 = Math.max(y - x, 0);
+        int y1 = Math.max(x - y, 0);
+        for (int i=0; (y1-i >= 0) && (i+x1<4); i++) {
+            if (board[i+x1][y1-i] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     // Sudoku solver
     // flood fill

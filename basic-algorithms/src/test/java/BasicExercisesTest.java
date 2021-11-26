@@ -139,4 +139,16 @@ public class BasicExercisesTest {
 
         BasicExercises.sudokuSolver(board);
     }
+
+    @Test
+    public void nQueenProblemTest() {
+        int[][] board = new int[][] {
+                { 0, 0, 0, 1 },
+                { 0, 0, 0, 0 },
+                { 0, 0, 0, 0 },
+                { 0, 0, 0, 0 },
+        };
+
+        BasicExercises.nQueenProblem(board, 0, 4);
+    }
 }

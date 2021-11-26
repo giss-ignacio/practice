@@ -8,7 +8,7 @@ public class InterviewExercises {
      * find two words that compound the word given with the list of words
      * rockstar in [rockstar, rock, star, rocks, tar, highway, high, way] -> rock, star, rocks, tar
      * srocktar -> "" there's no "s" ,
-     * solution KMP Algorithm for Pattern Searching
+     * best solution will be (not this) KMP Algorithm for Pattern Searching
      */
     public static void printCompoundWords(String word, List<String> words) {
         Set<String> tmpWords = new HashSet<>();

@@ -9,6 +9,7 @@ public class InterviewExercisesTest {
     public void printCompoundWordsTest() {
         List<String> words = Arrays.asList("rockstar", "rock", "star", "rocks", "tar", "highway", "high", "way");
         InterviewExercises.printCompoundWords("rockstar", words);
-        //InterviewExercises.printCompoundWords("srocktar", words);
+        
+        InterviewExercises.printCompoundWords("srocktar", words);
     }
 }
